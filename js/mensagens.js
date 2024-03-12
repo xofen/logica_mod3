@@ -1,0 +1,1 @@
+const msg1 = `Pois bem ${jogador.nome}`;

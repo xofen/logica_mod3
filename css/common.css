@@ -1,0 +1,93 @@
+html {
+    background-color: bisque;
+
+    font-family: "Bitter", serif;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding: 30px 0 50px 0;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "M PLUS Code Latin", monospace;
+    letter-spacing: .2rem;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+}
+
+p:first-of-type:first-letter {
+    font-size: 1.9rem;
+    margin-left: 1rem;
+}
+
+section {
+    width: 300px;
+    margin: 30px auto;
+    padding: 50px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+section h2 {
+    align-self: start;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 16px;
+
+    line-height: 2.7rem;
+
+    width: min-content;
+}
+
+button {
+    font-family: "M PLUS Code Latin", monospace;
+    font-size: 1.1rem;
+    padding: 10px 30px;
+    text-transform: lowercase;
+    letter-spacing: .2rem;
+    background-color: lightcyan;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+#btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+#btns button {
+    width: 100%;
+}
+

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R P G - Logica</title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100..700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=M+PLUS+Code+Latin:wght@100..700&display=swap" rel="stylesheet">
+
+    <script src="./js/script.js" async></script>
+</head>
+
+<body>
+
+    <header>
+        <h1 id="title">- R P G -</h1>
+    </header>
+
+    <main>
+        <section id="welcome">
+            <h2>Bem vindo!</h2>
+            <p>Este é o projeto final para:<br> o Módulo 3 (Lógica)<br>do curso FullStack<br>da Fullture.</p>
+
+            <button onclick="startGame()">Iniciar</button>
+        </section>
+
+        <section id="atributes">
+            <h2 id="msg1"></h2>
+            <p>Antes de mais nada você precisa definir seus atributos.</p>
+            <p>São 20 pontos para serem distribuidos entre vida e ataque.</p>
+
+            <button onclick="setAttributes()">Definir</button>
+        </section>
+
+        <section id="summary">
+            <h2>Resumo</h2>
+            <p id="msg2"></p>
+
+            <button onclick="adventure()">Continuar</button>
+        </section>
+
+        <section id="exploreONE">
+            <h2>o Começo</h2>
+            <p id="msg3"></p>
+
+            <button id="btnGoTo" onclick="goTo()">Continuar</button>
+        </section>
+
+        <section id="exploreTWO">
+            <h2>...na entrada da Masmorra</h2>
+            <p>Após seguir as instruções dadas pelos integrantes da Guilda, você chega na entrada da masmorra.</p>
+
+            <p id="msg4"></p>
+
+            <h3>o que você quer fazer:</h3>
+            <div id="btns">
+                <button id="btnExplorarMasmorra" onclick="explorarEntrada()">Explorar as redondezas</button>
+                <button id="btnEntrarMasmorra" onclick="entrarMasmorra()">Entrar na Masmorra</button>
+            </div>
+        </section>
+
+        <section id="exploreTHREE">
+            <h2>Antecâmara</h2>
+            <p>Ao entrar na masmorra, você percebe que as paredes estão
+                cobertas por símbolos estranhos, emitindo uma luz fraca na
+                penumbra. O ar dentro está impregnado com o cheiro forte
+                de morte e decomposição, fazendo sua pele arrepiar. Você
+                consegue ouvir os sons distantes de algo se movendo nas
+                profundezas da masmorra, mas não consegue identificar
+                exatamente o que é.</p>
+
+            <div id="msg5-box">
+                <p>Ao analisar o interior da caverna, você nota que o piso está
+                    repleto de ossos de animais, deixando o cheiro pútrido ainda
+                    mais evidente, você começa a observar as paredes desta sala
+                    e encontra um objeto pendurado...</p>
+
+                <button id="btnTocar" onclick="tocarObj()">Tocar</button>
+
+                <p id="msg5"></p>
+            </div>
+
+            <h3>o que você quer fazer:</h3>
+            <div id="btns">
+                <button id="btnSeguirAntecamara" onclick="seguirAntecamara()">Seguir em frente</button>
+                <button id="btnExplorarAntecamara" onclick="explorarAntecamara()">Investigar as redondezas</button>
+            </div>
+        </section>
+
+        <section id="exploreFOUR">
+            <h2>Algo se Aproxima</h2>
+
+            <p id="msg6">rgerg</p>
+
+            <h3>o que você quer fazer:</h3>
+            <div id="btns">
+                <button id="btnLutarEsqueletos" onclick="lutarEsqueletos()">Lutar!</button>
+                <button id="btnSairEsqueletos" onclick="sairEsqueletos()">Sair Correndo</button>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
