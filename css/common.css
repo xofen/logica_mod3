@@ -91,3 +91,13 @@ button:hover {
     width: 100%;
 }
 
+.disabled-button {
+    background-color: black;
+    color: red;
+}
+
+.disabled-button:hover {
+    background-color: black;
+    color: red;
+    border-color: red;
+}

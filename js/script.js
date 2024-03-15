@@ -4,17 +4,17 @@ let jogador = {
     vida: 0,
 };
 
-let monstro = {
-    nome: "",
+const esqueletos = {
     ataque: 0,
     vida: 0,
 };
 
+
 function startGame() {
     let nomeJogador = prompt("Qual é o seu nome mesmo?");
 
-    if (!nomeJogador) {
-        alert("Por favor, digite um nome.");
+    if (!nomeJogador || nomeJogador.trim() === "") {
+        alert("Por favor, digite um nome válido.");
     } else {
         document.getElementById("title").innerHTML = `A aventura de ${nomeJogador}`;
         document.getElementById("welcome").style.display = "none";
@@ -22,25 +22,27 @@ function startGame() {
 
         document.getElementById("msg1").innerHTML = `Muito bem, ${nomeJogador}!`;
 
-        return (jogador.nome = nomeJogador);
+        jogador.nome = nomeJogador;
     }
 }
 
+
 function setAttributes() {
     const pontos = 20;
-    let ataqueJogador = +prompt(
-        `Qual é o seu ataque?\n\nVoce tem ${pontos} pontos restantes.`
-    );
-    let vidaJogador = +prompt(
-        `Qual é a sua vida?\n\nVoce tem ${pontos - ataqueJogador} pontos restantes.`
-    );
 
-    if (!ataqueJogador || !vidaJogador) {
-        alert("Por favor, digite um valor.");
+    let ataqueJogador = parseInt(prompt(
+        `Qual é o seu ataque?\n\nVocê tem ${pontos} pontos restantes.`
+    ));
+    let vidaJogador = parseInt(prompt(
+        `Qual é a sua vida?\n\nVocê tem ${pontos - ataqueJogador} pontos restantes.`
+    ));
+
+    if (isNaN(ataqueJogador) || isNaN(vidaJogador)) {
+        alert("Por favor, digite um valor numérico.");
+    } else if (ataqueJogador < 0 || vidaJogador < 0) {
+        alert("Por favor, digite valores não negativos.");
     } else if (ataqueJogador + vidaJogador > pontos) {
-        alert("Parece que você gastou pontos de mais!");
-    } else if (ataqueJogador + vidaJogador <= 0) {
-        alert("Parece que você gastou um valor negativo?");
+        alert("Parece que você gastou pontos demais!");
     } else {
         document.getElementById("atributes").style.display = "none";
         document.getElementById("summary").style.display = "flex";
@@ -52,9 +54,10 @@ function setAttributes() {
         jogador.ataque = ataqueJogador * 10;
         jogador.vida = vidaJogador * 100;
 
-        return jogador.ataque, jogador.vida;
+        return { ataque: jogador.ataque, vida: jogador.vida };
     }
 }
+
 
 function adventure() {
     document.getElementById("summary").style.display = "none";
@@ -64,13 +67,14 @@ function adventure() {
     ).innerHTML = `Então, ${jogador.nome}... já se passaram alguns dias desde que você se juntou a Guilda dos Aventureuiros. Pelo visto você não se lembra, mas logo antes de aparecer aqui você estava perambulando pela área da Masmorra de Ferro, aqui pertinho... Eu recomendo que você volte a entrada da masmorra e tente novos caminhos.`;
 }
 
+
 function goTo() {
     document.getElementById("btnGoTo").disabled = true;
-    document.getElementById("btnGoTo").style.backgroundColor = 'black';
-    document.getElementById("btnGoTo").style.color = 'red';
+    document.getElementById("btnGoTo").classList.add("disabled-button");
     document.getElementById("exploreONE").style.opacity = "0.5";
     document.getElementById("exploreTWO").style.display = "flex";
 }
+
 
 function explorarEntrada() {
     const chance = Math.random();
@@ -79,85 +83,77 @@ function explorarEntrada() {
         jogador.vida += 200;
         document.getElementById(
             "msg4"
-        ).innerHTML = `Parabens, ${jogador.nome}!<br>Você encontrou Carne de Lagardão e adquiriu 200 de vida. Você agora tem ${jogador.vida} de vida.`;
-
-        document.getElementById("btnExplorarMasmorra").disabled = true;
-        document.getElementById("btnExplorarMasmorra").style.backgroundColor = 'black';
-        document.getElementById("btnExplorarMasmorra").style.color = 'red';
-
-        return jogador.vida;
+        ).innerHTML = `Parabéns, ${jogador.nome}!<br>Você encontrou Carne de Lagardão e adquiriu 200 de vida. Agora você tem ${jogador.vida} de vida.`;
     } else {
-        jogador.ataque += jogador.ataque * 0.1;
+        jogador.ataque *= 1.1;
         document.getElementById(
             "msg4"
-        ).innerHTML = `Infelizmente parece que não há nada por aqui que possa ajudar. Pelo menos você se exercitou um pouco e adquiriou 10% de ataque. Você agora tem ${jogador.ataque} de ataque.`;
-
-        document.getElementById("btnExplorarMasmorra").disabled = true;
-        document.getElementById("btnExplorarMasmorra").style.backgroundColor = 'black';
-        document.getElementById("btnExplorarMasmorra").style.color = 'red';
-
-        return jogador.ataque;
+        ).innerHTML = `Infelizmente parece que não há nada por aqui que possa ajudar. Pelo menos você se exercitou um pouco e adquiriu 10% de ataque. Agora você tem ${jogador.ataque} de ataque.`;
     }
+
+    document.getElementById("btnExplorarMasmorra").disabled = true;
+    document.getElementById("btnExplorarMasmorra").classList.add("disabled-button");
+
+    return;
 }
+
 
 function entrarMasmorra() {
     document.getElementById("btnExplorarMasmorra").disabled = true;
     document.getElementById("btnEntrarMasmorra").disabled = true;
-    document.getElementById("btnExplorarMasmorra").style.backgroundColor = 'black';
-    document.getElementById("btnExplorarMasmorra").style.color = 'red';
-    document.getElementById("btnEntrarMasmorra").style.backgroundColor = 'black';
-    document.getElementById("btnEntrarMasmorra").style.color = 'red';
+    document.getElementById("btnExplorarMasmorra").classList.add("disabled-button");
+    document.getElementById("btnEntrarMasmorra").classList.add("disabled-button");
 
     document.getElementById("exploreTHREE").style.display = "flex";
     document.getElementById("exploreTWO").style.opacity = "0.5";
 }
 
+
 function explorarAntecamara() {
     document.getElementById("btnExplorarAntecamara").disabled = true;
-    document.getElementById("btnExplorarAntecamara").style.backgroundColor = 'black';
-    document.getElementById("btnExplorarAntecamara").style.color = 'red';
+    document.getElementById("btnExplorarAntecamara").classList.add("disabled-button");
     document.getElementById("msg5-box").style.display = "block";
 }
 
+
 function tocarObj() {
     const chance = Math.random();
+    let jogadorV = jogador.vida;
+    let jogadorA = jogador.ataque;
 
     if (chance < 0.5) {
-        jogador.vida = jogador.vida * 2;
-        jogador.ataque = jogador.ataque / 2;
+        jogadorV *= 2;
+        jogadorA /= 2;
 
         document.getElementById(
             "msg5"
-        ).innerHTML = `${jogador.nome}! Você recebeu a maldição da Vida. Seus pontos de vida agora são o dobro (${jogador.vida}), mas seus pontos de ataque cairam pela metade (${jogador.ataque}).`;
+        ).innerHTML = `${jogador.nome}! Você recebeu a maldição da Vida. Seus pontos de vida agora são o dobro (${jogadorV}), mas seus pontos de ataque caíram pela metade (${jogadorA}).`;
 
-        document.getElementById("btnTocar").disabled = true;
-        document.getElementById("btnTocar").style.backgroundColor = 'black';
-        document.getElementById("btnTocar").style.color = 'red';
-
-        return jogador.vida, jogador.ataque;
     } else {
-        jogador.ataque = jogador.ataque * 2;
-        jogador.vida = jogador.vida / 2;
+        jogadorA *= 2;
+        jogadorV /= 2;
 
         document.getElementById(
             "msg5"
-        ).innerHTML = `${jogadorNome}!Você recebeu a maldição do Ataque. Seus pontos de ataque agora são o dobro (${jogador.ataque}), mas seus pontos de vida cairam pela metade (${jogador.vida}).`;
-
-        document.getElementById("btnTocar").disabled = true;
-        document.getElementById("btnTocar").style.backgroundColor = 'black';
-        document.getElementById("btnTocar").style.color = 'red';
-
-        return jogador.ataque, jogador.vida;
+        ).innerHTML = `${jogador.nome}! Você recebeu a maldição do Ataque. Seus pontos de ataque agora são o dobro (${jogadorA}), mas seus pontos de vida caíram pela metade (${jogadorV}).`;
     }
+
+    jogador.vida = jogadorV;
+    jogador.ataque = jogadorA;
+
+    document.getElementById("btnTocar").disabled = true;
+    document.getElementById("btnTocar").classList.add("disabled-button");
+
+    return;
 }
+
 
 function seguirAntecamara() {
     document.getElementById("btnSeguirAntecamara").disabled = true;
     document.getElementById("btnExplorarAntecamara").disabled = true;
-    document.getElementById("btnExplorarAntecamara").style.backgroundColor = 'black';
-    document.getElementById("btnExplorarAntecamara").style.color = 'red';
-    document.getElementById("btnSeguirAntecamara").style.backgroundColor = 'black';
-    document.getElementById("btnSeguirAntecamara").style.color = 'red';
+    document.getElementById("btnExplorarAntecamara").classList.add("disabled-button");
+    document.getElementById("btnSeguirAntecamara").classList.add("disabled-button");
+
     document.getElementById("exploreTHREE").style.opacity = "0.5";
     document.getElementById("exploreFOUR").style.display = "flex";
 
