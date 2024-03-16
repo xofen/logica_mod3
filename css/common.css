@@ -27,9 +27,11 @@ h2 {
 p {
     font-size: 1.1rem;
     line-height: 1.8rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
-p:first-of-type:first-letter {
+p:first-letter {
     font-size: 1.9rem;
     margin-left: 1rem;
 }
@@ -78,7 +80,7 @@ button:hover {
     border-color: white;
 }
 
-#btns {
+.btns {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +89,8 @@ button:hover {
     width: 100%;
 }
 
-#btns button {
+
+.btns button {
     width: 100%;
 }
 
@@ -100,4 +103,12 @@ button:hover {
     background-color: black;
     color: red;
     border-color: red;
+}
+
+#msg4, #msg5, #msg7 {
+    display: none;
+}
+
+#venceu-esqueletos, #perdeu-esqueletos {
+    display: none;
 }

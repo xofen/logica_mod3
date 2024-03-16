@@ -64,7 +64,7 @@
             <p id="msg4"></p>
 
             <h3>o que você quer fazer:</h3>
-            <div id="btns">
+            <div class="btns">
                 <button id="btnExplorarMasmorra" onclick="explorarEntrada()">Explorar as redondezas</button>
                 <button id="btnEntrarMasmorra" onclick="entrarMasmorra()">Entrar na Masmorra</button>
             </div>
@@ -80,19 +80,21 @@
                 profundezas da masmorra, mas não consegue identificar
                 exatamente o que é.</p>
 
-            <div id="msg5-box">
+            <div id="msg5-box" class="msg-box">
                 <p>Ao analisar o interior da caverna, você nota que o piso está
                     repleto de ossos de animais, deixando o cheiro pútrido ainda
                     mais evidente, você começa a observar as paredes desta sala
                     e encontra um objeto pendurado...</p>
-
-                <button id="btnTocar" onclick="tocarObj()">Tocar</button>
+                
+                <div class="btns">
+                    <button id="btnTocar" onclick="tocarObj()">Tocar</button>
+                </div>
 
                 <p id="msg5"></p>
             </div>
 
             <h3>o que você quer fazer:</h3>
-            <div id="btns">
+            <div class="btns">
                 <button id="btnSeguirAntecamara" onclick="seguirAntecamara()">Seguir em frente</button>
                 <button id="btnExplorarAntecamara" onclick="explorarAntecamara()">Investigar as redondezas</button>
             </div>
@@ -101,20 +103,42 @@
         <section id="exploreFOUR">
             <h2>Algo se Aproxima</h2>
 
-            <p id="msg6">rgerg</p>
+            <p id="msg6"></p>
 
             <h3>o que você quer fazer:</h3>
-            <div id="btns">
+            <div class="btns">
                 <button id="btnLutarEsqueletos" onclick="lutarEsqueletos()">Lutar!</button>
                 <button id="btnSairEsqueletos" onclick="sairEsqueletos()">Sair Correndo</button>
             </div>
 
         </section>
 
-        <section id="exploreFIVE">
-            
+        <section id="exploreFIVEwin">
+            <h2>Um Exército de Esqueletos</h2>
+            <p>Finalmente o Exército foi conquistado! Uma sensação de paz invade cada centímetro da câmara...</p>
+
+            <p>Você repara que entre a pilha de ossos que restaram da batalha se encontra um frasco de vidro contendo um líquido vermelho.</p>
+
+            <h3>o que você quer fazer:</h3>
+            <div class="btns">
+                <button id="btnBeberUmPouco" onclick="frasco('pouco')">Beber só um pouco</button>
+                <button id="btnBeberTudo" onclick="frasco('tudo')">Beber TUDO!</button>
+                <button id="btnQuebrarFrasco" onclick="frasco('quebrar')">Jogar o frasco fora</button>
+            </div>
+
+            <p id="msg7"></p>
+
+            <h3 id="title-frasco">ou você pode:</h3>
+            <button id="btnContinuar" onclick="continuar()">Continuar!</button>
         </section>
 
+        <section id="exploreFIVElose">
+            <h2>Um Exército de Esqueletos</h2>
+            <p>Não foi dessa vez que você derrotou o antigo Exército de Esqueletos... tudo fica escuro e quieto...</p>
+
+            <h3>sem muita escolha..:</h3>
+            <button id="btnRecomecar" onclick="recomecar()">Recomeçar!</button>
+        </section>
     </main>
 
 </body>

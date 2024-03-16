@@ -5,8 +5,8 @@ let jogador = {
 };
 
 const esqueletos = {
-    ataque: 0,
-    vida: 0,
+    ataque: 100,
+    vida: 1,
 };
 
 
@@ -79,6 +79,8 @@ function goTo() {
 function explorarEntrada() {
     const chance = Math.random();
 
+    document.getElementById("msg4").style.display = "block";
+
     if (chance < 0.5) {
         jogador.vida += 200;
         document.getElementById(
@@ -121,6 +123,8 @@ function tocarObj() {
     let jogadorV = jogador.vida;
     let jogadorA = jogador.ataque;
 
+    document.getElementById("msg5").style.display = "block";
+
     if (chance < 0.5) {
         jogadorV *= 2;
         jogadorA /= 2;
@@ -151,8 +155,10 @@ function tocarObj() {
 function seguirAntecamara() {
     document.getElementById("btnSeguirAntecamara").disabled = true;
     document.getElementById("btnExplorarAntecamara").disabled = true;
+    document.getElementById("btnTocar").disabled = true;
     document.getElementById("btnExplorarAntecamara").classList.add("disabled-button");
     document.getElementById("btnSeguirAntecamara").classList.add("disabled-button");
+    document.getElementById("btnTocar").classList.add("disabled-button");
 
     document.getElementById("exploreTHREE").style.opacity = "0.5";
     document.getElementById("exploreFOUR").style.display = "flex";
@@ -172,3 +178,154 @@ function seguirAntecamara() {
         return jogador.vida;
     }
 }
+
+
+function lutarEsqueletos() {
+    document.getElementById("btnLutarEsqueletos").disabled = true;
+    document.getElementById("btnSairEsqueletos").disabled = true;
+    document.getElementById("btnLutarEsqueletos").classList.add("disabled-button");
+    document.getElementById("btnSairEsqueletos").classList.add("disabled-button");
+
+    document.getElementById("exploreFOUR").style.opacity = "0.5";
+
+    let jogadorV = jogador.vida;
+    let jogadorA = jogador.ataque;
+
+    let esqueletosV = esqueletos.vida;
+    let esqueletosA = esqueletos.ataque;
+
+    while (jogadorV > 0 && esqueletosV > 0) {
+        alert(`${jogador.nome}, sua vez!`);
+        let jogadorAttck = prompt("Escolha seu ataque! ('NORMAL', 'COMBO' ou 'ESPECIAL')");
+
+        let damageDealt;
+
+        switch(jogadorAttck.toLowerCase()) {
+            case "normal":
+                damageDealt = jogadorA;
+                break;
+
+            case "combo":
+                if (Math.random() < 0.5) {
+                    damageDealt = jogadorA * 2;
+                } else {
+                    alert("Você errou seu ataque!");
+                    damageDealt = 0;
+                }
+                break;
+
+            case "especial":
+                if (Math.random() > 0.8) {
+                    damageDealt = jogadorA * 4;
+                } else {
+                    alert("Você errou seu ataque!");
+                    damageDealt = 0;
+                }
+                break;
+
+            default:
+                alert("Você não sabe esse ataque! Que pena...");
+                damageDealt = 0;
+        }
+
+        esqueletosV -= damageDealt;
+        alert(`Você tirou ${damageDealt} pontos de vida dos esqueletos. Ainda restam ${esqueletosV}!`);
+
+        if (esqueletosV <= 0) {
+            alert(`Parabéns, ${jogador.nome}! Você derrotou os esqueletos!`);
+
+            document.getElementById("exploreFIVEwin").style.display = "flex";
+
+            return jogador.vida;
+        }
+
+        alert("Os esqueletos atacam!");
+
+        let damageTaken;
+        let ataqueInimigo = Math.random();
+
+        if (ataqueInimigo <= 0.5) {
+            damageTaken = esqueletosA;
+        } else if (ataqueInimigo <= 0.8) {
+            damageTaken = esqueletosA * 2;
+        } else {
+            damageTaken = esqueletosA * 4;
+        }
+
+        jogadorV -= damageTaken;
+        alert(`Os esqueletos atacam e tiram ${damageTaken} pontos de vida de você. Restam ${jogadorV}`);
+
+        if (jogadorV <= 0) {
+            alert(`Você foi derrotado pelos esqueletos. Game Over.`);
+            
+            document.getElementById("exploreFIVElose").style.display = "flex";
+            
+            break;
+        }
+    }
+}
+
+
+function sairEsqueletos() {
+    location.replace("https://www.youtube.com/watch?v=h4UqMyldS7Q");
+}
+
+
+function recomecar() {
+    location.reload("https://www.youtube.com/watch?v=GA7LcSX8tYE");
+}
+
+
+function frasco(x) {
+    switch(x) {
+        case 'pouco':
+            jogador.vida += 2000;
+
+            document.getElementById("btnBeberUmPouco").disabled = true;
+            document.getElementById("btnBeberUmPouco").classList.add("disabled-button");
+            document.getElementById("btnBeberTudo").disabled = true;
+            document.getElementById("btnBeberTudo").classList.add("disabled-button");
+            document.getElementById("btnQuebrarFrasco").disabled = true;
+            document.getElementById("btnQuebrarFrasco").classList.add("disabled-button");
+            
+            document.getElementById("msg7").style.display = "block";
+            document.getElementById("msg7").innerHTML = `Parabéns, ${jogador.nome}!<br><br>A dose é a diferença entre a cura e o veneno! Sua vida aumentou em 2000.<br><br>Agora você tem ${jogador.vida} de vida.`;
+
+            document.getElementById("title-frasco").innerHTML = "agora sim:";
+            
+            break;
+            case 'tudo':
+            jogador.vida *= 1.45;
+
+            document.getElementById("btnBeberUmPouco").disabled = true;
+            document.getElementById("btnBeberUmPouco").classList.add("disabled-button");
+            document.getElementById("btnBeberTudo").disabled = true;
+            document.getElementById("btnBeberTudo").classList.add("disabled-button");
+            document.getElementById("btnQuebrarFrasco").disabled = true;
+            document.getElementById("btnQuebrarFrasco").classList.add("disabled-button");
+            
+            document.getElementById("title-frasco").innerHTML = "agora sim:";
+
+            document.getElementById("msg7").style.display = "block";
+            document.getElementById("msg7").innerHTML = `Uau, ${jogador.nome}!<br><br>Pelo menos de sede você não.... né! Sua vida aumentou em 45%. Agora você tem ${jogador.vida} de vida.`;
+
+            break;
+        case 'quebrar':
+            jogador.ataque *= 1.45;
+
+            document.getElementById("btnBeberUmPouco").disabled = true;
+            document.getElementById("btnBeberUmPouco").classList.add("disabled-button");
+            document.getElementById("btnBeberTudo").disabled = true;
+            document.getElementById("btnBeberTudo").classList.add("disabled-button");
+            document.getElementById("btnQuebrarFrasco").disabled = true;
+            document.getElementById("btnQuebrarFrasco").classList.add("disabled-button");
+
+            document.getElementById("title-frasco").innerHTML = "agora sim:";
+
+            document.getElementById("msg7").style.display = "block";
+            document.getElementById("msg7").innerHTML = `${jogador.nome}!<br><br>O frasco quebrou!<br><br>O líquido vermelho ao entrar em contato com o chão evapora em uma névoa púrpura que invade suas narinas.<br><br>Ao respirar tal substância seu ataque aumentou em 45%. Agora você tem ${jogador.ataque} de ataque.`;
+
+            break;
+    }
+}
+
