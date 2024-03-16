@@ -73,6 +73,7 @@ function goTo() {
     document.getElementById("btnGoTo").classList.add("disabled-button");
     document.getElementById("exploreONE").style.opacity = "0.5";
     document.getElementById("exploreTWO").style.display = "flex";
+    document.getElementById("exploreTWO").scrollIntoView();
 }
 
 
@@ -108,6 +109,8 @@ function entrarMasmorra() {
 
     document.getElementById("exploreTHREE").style.display = "flex";
     document.getElementById("exploreTWO").style.opacity = "0.5";
+
+    document.getElementById("exploreTHREE").scrollIntoView();
 }
 
 
@@ -115,6 +118,8 @@ function explorarAntecamara() {
     document.getElementById("btnExplorarAntecamara").disabled = true;
     document.getElementById("btnExplorarAntecamara").classList.add("disabled-button");
     document.getElementById("msg5-box").style.display = "block";
+    
+    document.getElementById("exploreFOUR").scrollIntoView();
 }
 
 
@@ -177,6 +182,9 @@ function seguirAntecamara() {
 
         return jogador.vida;
     }
+
+    
+    document.getElementById("exploreFOUR").scrollIntoView();
 }
 
 
@@ -236,6 +244,8 @@ function lutarEsqueletos() {
 
             document.getElementById("exploreFIVEwin").style.display = "flex";
 
+            document.getElementById("exploreFIVEwin").scrollIntoView();
+
             return jogador.vida;
         }
 
@@ -259,6 +269,8 @@ function lutarEsqueletos() {
             alert(`Você foi derrotado pelos esqueletos. Game Over.`);
             
             document.getElementById("exploreFIVElose").style.display = "flex";
+            
+            document.getElementById("exploreFIVElose").scrollIntoView();
             
             break;
         }
