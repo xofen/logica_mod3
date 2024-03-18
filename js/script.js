@@ -88,7 +88,7 @@ function explorarEntrada() {
             "msg4"
         ).innerHTML = `Parabéns, ${jogador.nome}!<br>Você encontrou Carne de Lagardão e adquiriu 200 de vida. Agora você tem ${jogador.vida} de vida.`;
     } else {
-        jogador.ataque *= 1.1;
+        jogador.ataque = Math.round(jogador.ataque * 1.1);
         document.getElementById(
             "msg4"
         ).innerHTML = `Infelizmente parece que não há nada por aqui que possa ajudar. Pelo menos você se exercitou um pouco e adquiriu 10% de ataque. Agora você tem ${jogador.ataque} de ataque.`;
@@ -147,8 +147,8 @@ function tocarObj() {
         ).innerHTML = `${jogador.nome}! Você recebeu a maldição do Ataque. Seus pontos de ataque agora são o dobro (${jogadorA}), mas seus pontos de vida caíram pela metade (${jogadorV}).`;
     }
 
-    jogador.vida = jogadorV;
-    jogador.ataque = jogadorA;
+    jogador.vida = Math.round(jogadorV);
+    jogador.ataque = Math.round(jogadorA);
 
     document.getElementById("btnTocar").disabled = true;
     document.getElementById("btnTocar").classList.add("disabled-button");
@@ -180,7 +180,7 @@ function seguirAntecamara() {
             "msg6"
         ).innerHTML = `Ao se adiantar para a entrada, você tropega e perde 5% de sua vida. Você agora tem ${jogador.vida} de vida.<br><br>${jogador.nome}! Se prepare um exército de esqueletos se aproxima!`;
 
-        return jogador.vida;
+        return Math.round(jogador.vida);
     }
 
     
@@ -307,7 +307,7 @@ function frasco(x) {
             
             break;
             case 'tudo':
-            jogador.vida *= 1.45;
+            jogador.vida = Math.round(jogador.vida * 1.45);
 
             document.getElementById("btnBeberUmPouco").disabled = true;
             document.getElementById("btnBeberUmPouco").classList.add("disabled-button");
@@ -323,7 +323,7 @@ function frasco(x) {
 
             break;
         case 'quebrar':
-            jogador.ataque *= 1.45;
+            jogador.ataque = Math.round(jogador.ataque * 1.45);
 
             document.getElementById("btnBeberUmPouco").disabled = true;
             document.getElementById("btnBeberUmPouco").classList.add("disabled-button");
