@@ -9,6 +9,21 @@ const esqueletos = {
     vida: 1,
 };
 
+const boss = {
+    nome: "",
+    ataque: 300,
+    vida: 1,
+}; 
+
+function reverseName(name) {
+    return name.split("").reverse().join("");
+}
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 function startGame() {
     let nomeJogador = prompt("Qual é o seu nome mesmo?");
@@ -23,6 +38,7 @@ function startGame() {
         document.getElementById("msg1").innerHTML = `Muito bem, ${nomeJogador}!`;
 
         jogador.nome = nomeJogador;
+        boss.nome = capitalizeFirstLetter(reverseName(jogador.nome).toLowerCase());
     }
 }
 
@@ -47,9 +63,10 @@ function setAttributes() {
         document.getElementById("atributes").style.display = "none";
         document.getElementById("summary").style.display = "flex";
 
-        document.getElementById("msg2").innerHTML = `Seu nome é: ${jogador.nome
-            }<br>seu Ataque: ${ataqueJogador * 10}<br> e sua Vida: ${vidaJogador * 100
-            }`;
+        document.getElementById("msg2").innerHTML = `Seu nome é::`;
+        document.getElementById("msg2a").innerHTML = ` ${jogador.nome}`;
+        document.getElementById("msg2b").innerHTML = `seus atributos::`;
+        document.getElementById("msg2c").innerHTML = `vida::  ${vidaJogador * 100}<br><br>ataque::  ${ataqueJogador * 10}`;
 
         jogador.ataque = ataqueJogador * 10;
         jogador.vida = vidaJogador * 100;
@@ -117,7 +134,8 @@ function entrarMasmorra() {
 function explorarAntecamara() {
     document.getElementById("btnExplorarAntecamara").disabled = true;
     document.getElementById("btnExplorarAntecamara").classList.add("disabled-button");
-    document.getElementById("msg5-box").style.display = "block";
+    document.getElementById("msg5-box").style.display = "flex";
+    document.getElementById("msg5-btn").style.display = "flex";
     
     document.getElementById("exploreFOUR").scrollIntoView();
 }
@@ -125,35 +143,30 @@ function explorarAntecamara() {
 
 function tocarObj() {
     const chance = Math.random();
-    let jogadorV = jogador.vida;
-    let jogadorA = jogador.ataque;
-
-    document.getElementById("msg5").style.display = "block";
+    let curseType, curseDescription, healthModifier, attackModifier;
 
     if (chance < 0.5) {
-        jogadorV *= 2;
-        jogadorA /= 2;
-
-        document.getElementById(
-            "msg5"
-        ).innerHTML = `${jogador.nome}! Você recebeu a maldição da Vida. Seus pontos de vida agora são o dobro (${jogadorV}), mas seus pontos de ataque caíram pela metade (${jogadorA}).`;
-
+        curseType = "vida";
+        curseDescription = "da Vida";
+        healthModifier = 2;
+        attackModifier = 0.5;
     } else {
-        jogadorA *= 2;
-        jogadorV /= 2;
-
-        document.getElementById(
-            "msg5"
-        ).innerHTML = `${jogador.nome}! Você recebeu a maldição do Ataque. Seus pontos de ataque agora são o dobro (${jogadorA}), mas seus pontos de vida caíram pela metade (${jogadorV}).`;
+        curseType = "ataque";
+        curseDescription = "do Ataque";
+        healthModifier = 0.5;
+        attackModifier = 2;
     }
 
-    jogador.vida = Math.round(jogadorV);
-    jogador.ataque = Math.round(jogadorA);
+    jogador.vida *= healthModifier;
+    jogador.ataque *= attackModifier;
+
+    const message = `${jogador.nome}! Você recebeu a maldição ${curseDescription}. Seus pontos de vida agora são ${healthModifier === 2 ? 'o dobro' : 'a metade'} (${jogador.vida}), mas seus pontos de ataque ${attackModifier === 2 ? 'dobraram' : 'caíram pela metade'} (${jogador.ataque}).`;
+
+    document.getElementById("msg5").innerHTML = message;
+    document.getElementById("msg5").style.display = "block";
 
     document.getElementById("btnTocar").disabled = true;
     document.getElementById("btnTocar").classList.add("disabled-button");
-
-    return;
 }
 
 
@@ -303,7 +316,7 @@ function frasco(x) {
             document.getElementById("msg7").style.display = "block";
             document.getElementById("msg7").innerHTML = `Parabéns, ${jogador.nome}!<br><br>A dose é a diferença entre a cura e o veneno! Sua vida aumentou em 2000.<br><br>Agora você tem ${jogador.vida} de vida.`;
 
-            document.getElementById("title-frasco").innerHTML = "agora sim:";
+            document.getElementById("title-frasco").innerHTML = "::agora sim::";
             
             break;
             case 'tudo':
@@ -316,7 +329,7 @@ function frasco(x) {
             document.getElementById("btnQuebrarFrasco").disabled = true;
             document.getElementById("btnQuebrarFrasco").classList.add("disabled-button");
             
-            document.getElementById("title-frasco").innerHTML = "agora sim:";
+            document.getElementById("title-frasco").innerHTML = "::agora sim::";
 
             document.getElementById("msg7").style.display = "block";
             document.getElementById("msg7").innerHTML = `Uau, ${jogador.nome}!<br><br>Pelo menos de sede você não.... né! Sua vida aumentou em 45%. Agora você tem ${jogador.vida} de vida.`;
@@ -332,7 +345,7 @@ function frasco(x) {
             document.getElementById("btnQuebrarFrasco").disabled = true;
             document.getElementById("btnQuebrarFrasco").classList.add("disabled-button");
 
-            document.getElementById("title-frasco").innerHTML = "agora sim:";
+            document.getElementById("title-frasco").innerHTML = "::agora sim::";
 
             document.getElementById("msg7").style.display = "block";
             document.getElementById("msg7").innerHTML = `${jogador.nome}!<br><br>O frasco quebrou!<br><br>O líquido vermelho ao entrar em contato com o chão evapora em uma névoa púrpura que invade suas narinas.<br><br>Ao respirar tal substância seu ataque aumentou em 45%. Agora você tem ${jogador.ataque} de ataque.`;
@@ -341,3 +354,67 @@ function frasco(x) {
     }
 }
 
+
+function continuar() {
+    document.getElementById("btnContinuar").disabled = true;
+    document.getElementById("btnContinuar").disabled = true;
+    document.getElementById("btnContinuar").classList.add("disabled-button");
+
+    document.getElementById("exploreFIVEwin").style.opacity = "0.5";
+    document.getElementById("exploreSIX").style.display = "flex";
+
+    document.getElementById("exploreSIX").scrollIntoView();
+}
+
+
+function entrarCasa() {
+    location.reload("https://www.youtube.com/watch?v=lin8YHV9tvo");
+}
+
+
+function entrarOuro() {
+    document.getElementById("btnOuro").disabled = true;
+    document.getElementById("btnFerro").disabled = true;
+    document.getElementById("btnCasa").disabled = true;
+    document.getElementById("btnOuro").classList.add("disabled-button");
+    document.getElementById("btnFerro").classList.add("disabled-button");
+    document.getElementById("btnCasa").classList.add("disabled-button");
+
+    document.getElementById("exploreSIX").style.opacity = "0.5";
+    document.getElementById("exploreSEVEN").style.display = "flex";
+
+    
+    document.getElementById("exploreSEVEN").scrollIntoView();
+
+    boss.ataque *= 2;
+    boss.vida *= 1.3;
+
+    document.getElementById("seven-title").innerHTML = "Poder, riqueza e mais...";
+    document.getElementById("msg8").innerHTML = `Atrás dela você encontra ouro, cristais, etc... e já começa a imaginar toda a glória e poder que poderá onter com este tesouro praticamente infinito.`;
+    document.getElementById("msg8a").innerHTML = `Assim que você toca a primeira moeda a seu alncace uma voz grave e ecoante chama seu nome...`;
+    document.getElementById("msg8b").innerHTML = `"Então você prefere assim? Acha que seria fácil?"`;
+    document.getElementById("msg8c").innerHTML = `o temível ${boss.nome} surge! com uma aura de poder nunca antes vista...`;
+}
+
+function entrarFerro() {
+    document.getElementById("btnOuro").disabled = true;
+    document.getElementById("btnFerro").disabled = true;
+    document.getElementById("btnCasa").disabled = true;
+    document.getElementById("btnOuro").classList.add("disabled-button");
+    document.getElementById("btnFerro").classList.add("disabled-button");
+    document.getElementById("btnCasa").classList.add("disabled-button");
+
+    document.getElementById("exploreSIX").style.opacity = "0.5";
+    document.getElementById("exploreSEVEN").style.display = "flex";
+
+    document.getElementById("exploreSEVEN").scrollIntoView();
+
+    jogador.ataque *= 1.6;
+    jogador.vida *= 1.6;
+
+    document.getElementById("seven-title").innerHTML = "Poder, riqueza e mais...";
+    document.getElementById("msg8").innerHTML = `após atravessa-la tudo sua volta desparece. o infinito é seu novo horizonte...`;
+    document.getElementById("msg8a").innerHTML = `alguns minutos se passam até que você consegue escutar alguém chamando por seu nome.`;
+    document.getElementById("msg8b").innerHTML = `"Finalmente você conseguiu chegar até minhã moradia. Seus passos até aqui não foram fáceis, não espere nenhum tipo de alívio agora..."`;
+    document.getElementById("msg8c").innerHTML = `${boss.nome}, o semeador de todo o mal corre em sua direção!`;
+}

@@ -29,11 +29,21 @@ p {
     line-height: 1.8rem;
     margin-bottom: 2rem;
     margin-top: 1rem;
+
+    /* width: 75%; */
+    max-width: 20ch;
+    align-self: start;
+
+    text-align: left;
 }
 
 p:first-letter {
     font-size: 1.9rem;
     margin-left: 1rem;
+}
+
+p:nth-child(odd) {
+    align-self: end;
 }
 
 section {
@@ -52,14 +62,22 @@ section {
 }
 
 section h2 {
-    align-self: start;
+    align-self: end;
+
+    padding-right: 3rem;
+    padding-left: 1.5rem;
+    padding-bottom: 16px;
+    padding-top: 3rem;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    padding-bottom: 16px;
+    border-radius: 5px;
 
     line-height: 2.7rem;
 
     width: min-content;
+
+    background: #ffe4c4;
+    color: black;
 }
 
 button {
@@ -110,5 +128,22 @@ button:hover {
 }
 
 #venceu-esqueletos, #perdeu-esqueletos {
+    display: none;
+}
+
+#msg5-box {
+    flex-direction: column;
+    width: 100%;
+}
+
+.msgP {
+    align-self: end;
+}
+
+#msg5 {
+    align-self: start;
+}
+
+#msg5-btn {
     display: none;
 }

@@ -30,7 +30,10 @@
     <main>
         <section id="welcome">
             <h2>Bem vindo!</h2>
-            <p>Este é o projeto final para:<br> o Módulo 3 (Lógica)<br>do curso FullStack<br>da Fullture.</p>
+            <p>este é o projeto final::</p>
+            <p>do módulo 3 (Lógica)</p>
+            <p>para o curso FullStack</p>
+            <p>da Fullture.</p>
 
             <div class="btns">
                 <button onclick="startGame()">Iniciar</button>
@@ -50,6 +53,9 @@
         <section id="summary">
             <h2>Resumo</h2>
             <p id="msg2"></p>
+            <p id="msg2a"></p>
+            <p id="msg2b"></p>
+            <p id="msg2c"></p>
             
             <div class="btns">
                 <button onclick="adventure()">Continuar</button>
@@ -71,7 +77,7 @@
 
             <p id="msg4"></p>
 
-            <h3>o que você quer fazer:</h3>
+            <h3>::o que você quer fazer::</h3>
             <div class="btns">
                 <button id="btnExplorarMasmorra" onclick="explorarEntrada()">Explorar as redondezas</button>
                 <button id="btnEntrarMasmorra" onclick="entrarMasmorra()">Entrar na Masmorra</button>
@@ -89,20 +95,19 @@
                 exatamente o que é.</p>
 
             <div id="msg5-box" class="msg-box">
-                <p>Ao analisar o interior da caverna, você nota que o piso está
+                <p class="msgP">Ao analisar o interior da caverna, você nota que o piso está
                     repleto de ossos de animais, deixando o cheiro pútrido ainda
                     mais evidente, você começa a observar as paredes desta sala
                     e encontra um objeto pendurado...</p>
-                
-                <div class="btns">
-                    <button id="btnTocar" onclick="tocarObj()">Tocar</button>
-                </div>
 
                 <p id="msg5"></p>
             </div>
 
-            <h3>o que você quer fazer:</h3>
+            <h3>::o que você quer fazer::</h3>
             <div class="btns">
+                <div id="msg5-btn" class="btns">
+                    <button id="btnTocar" onclick="tocarObj()">Tocar objeto</button>
+                </div>
                 <button id="btnSeguirAntecamara" onclick="seguirAntecamara()">Seguir em frente</button>
                 <button id="btnExplorarAntecamara" onclick="explorarAntecamara()">Investigar as redondezas</button>
             </div>
@@ -113,7 +118,7 @@
 
             <p id="msg6"></p>
 
-            <h3>o que você quer fazer:</h3>
+            <h3>::o que você quer fazer::</h3>
             <div class="btns">
                 <button id="btnLutarEsqueletos" onclick="lutarEsqueletos()">Lutar!</button>
                 <button id="btnSairEsqueletos" onclick="sairEsqueletos()">Sair Correndo</button>
@@ -127,7 +132,7 @@
 
             <p>Você repara que entre a pilha de ossos que restaram da batalha se encontra um frasco de vidro contendo um líquido vermelho.</p>
 
-            <h3>o que você quer fazer:</h3>
+            <h3>::o que você quer fazer::</h3>
             <div class="btns">
                 <button id="btnBeberUmPouco" onclick="frasco('pouco')">Beber só um pouco</button>
                 <button id="btnBeberTudo" onclick="frasco('tudo')">Beber TUDO!</button>
@@ -136,15 +141,17 @@
 
             <p id="msg7"></p>
 
-            <h3 id="title-frasco">ou você pode:</h3>
-            <button id="btnContinuar" onclick="continuar()">Continuar!</button>
+            <h3 id="title-frasco">::ou você pode::</h3>
+            <div class="btns">
+                <button id="btnContinuar" onclick="continuar()">Continuar!</button>
+            </div>
         </section>
 
         <section id="exploreFIVElose">
             <h2>Um Exército de Esqueletos</h2>
             <p>Não foi dessa vez que você derrotou o antigo Exército de Esqueletos... tudo fica escuro e quieto...</p>
 
-            <h3>sem muita escolha..:</h3>
+            <h3>::sem muita escolha..::</h3>
             <div class="btns">
                 <button id="btnRecomecar" onclick="recomecar()">Recomeçar!</button>
             </div>
@@ -152,6 +159,32 @@
 
         <section id="exploreSIX">
             <h2>Um novo horizonte?</h2>
+            <p>Num piscar de olhos você está em uma planície muito peculiar e ao mesmo tempo familiar também...</p>
+            <p>você percebe que está diante de três portas...</p>
+
+            <h3>::em qual você vai entrar::</h3>
+            <div class="btns">
+                <button id="btnOuro" onclick="entrarOuro()">Porta de Ouro</button>
+                <button id="btnFerro" onclick="entrarFerro()">Porta de Ferro</button>
+                <button id="btnCasa" onclick="entrarCasa()">Porta de Casa</button>
+            </div>
+        </section>
+
+        <section id="exploreSEVEN">
+            <h2 id="seven-title"></h2>
+            <p id="msg8"></p>
+            <p id="msg8a"></p>
+            <p id="msg8b"></p>
+            <p id="msg8c"></p>
+
+            <h3>::não tem volta..::</h3>
+            <div class="btns">
+                <button id="btnLutarBoss" onclick="lutarBoss()">é agora ou nunca!</button>
+            </div>
+        </section>
+
+        <section id="exploreEIGHT">
+            
         </section>
     </main>
 
