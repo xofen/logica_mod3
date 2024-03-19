@@ -5,14 +5,14 @@ let jogador = {
 };
 
 const esqueletos = {
-    ataque: 100,
-    vida: 1,
+    ataque: 75,
+    vida: 800,
 };
 
 const boss = {
     nome: "",
-    ataque: 300,
-    vida: 1,
+    ataque: 130,
+    vida: 1500,
 }; 
 
 function reverseName(name) {
@@ -244,6 +244,14 @@ function lutarEsqueletos() {
                 }
                 break;
 
+            case "eu_era_moleque":
+                damageDealt = esqueletosV;
+                break;
+
+            case "kill_all_bots":
+                jogadorV -= jogadorV;
+                break;
+
             default:
                 alert("Você não sabe esse ataque! Que pena...");
                 damageDealt = 0;
@@ -284,7 +292,7 @@ function lutarEsqueletos() {
             document.getElementById("exploreFIVElose").style.display = "flex";
             
             document.getElementById("exploreFIVElose").scrollIntoView();
-            
+
             break;
         }
     }
@@ -292,12 +300,13 @@ function lutarEsqueletos() {
 
 
 function sairEsqueletos() {
-    location.replace("https://www.youtube.com/watch?v=h4UqMyldS7Q");
+    window.open("https://www.youtube.com/watch?v=4ek6rjnF9cE", '_blank').focus();
+    location.reload();
 }
 
 
 function recomecar() {
-    location.reload("https://www.youtube.com/watch?v=GA7LcSX8tYE");
+    location.reload();
 }
 
 
@@ -396,6 +405,7 @@ function entrarOuro() {
     document.getElementById("msg8c").innerHTML = `o temível ${boss.nome} surge! com uma aura de poder nunca antes vista...`;
 }
 
+
 function entrarFerro() {
     document.getElementById("btnOuro").disabled = true;
     document.getElementById("btnFerro").disabled = true;
@@ -417,4 +427,142 @@ function entrarFerro() {
     document.getElementById("msg8a").innerHTML = `alguns minutos se passam até que você consegue escutar alguém chamando por seu nome.`;
     document.getElementById("msg8b").innerHTML = `"Finalmente você conseguiu chegar até minhã moradia. Seus passos até aqui não foram fáceis, não espere nenhum tipo de alívio agora..."`;
     document.getElementById("msg8c").innerHTML = `${boss.nome}, o semeador de todo o mal corre em sua direção!`;
+}
+
+
+function lutarBoss() {
+    document.getElementById("btnLutarBoss").disabled = true;
+    document.getElementById("btnLutarBoss").classList.add("disabled-button");
+
+    document.getElementById("exploreSEVEN").style.opacity = "0.5";
+
+    let jogadorV = jogador.vida;
+    let jogadorA = jogador.ataque;
+
+    let bossV = boss.vida;
+    let bossA = boss.ataque;
+
+    while (jogadorV > 0 && bossV > 0) {
+        alert(`${jogador.nome}, sua vez!`);
+        let jogadorAttck = prompt("Escolha seu ataque! ('NORMAL', 'COMBO' ou 'ESPECIAL')");
+
+        let damageDealt;
+
+        switch(jogadorAttck.toLowerCase()) {
+            case "normal":
+                damageDealt = jogadorA;
+                break;
+
+            case "combo":
+                if (Math.random() < 0.5) {
+                    damageDealt = jogadorA * 2;
+                } else {
+                    alert("Você errou seu ataque!");
+                    damageDealt = 0;
+                }
+                break;
+
+            case "especial":
+                if (Math.random() > 0.8) {
+                    damageDealt = jogadorA * 4;
+                } else {
+                    alert("Você errou seu ataque!");
+                    damageDealt = 0;
+                }
+                break;
+
+            case "eu_era_moleque":
+                damageDealt = bossV;
+                break;
+
+            case "kill_all_bots":
+                jogadorV -= jogadorV;
+                break;
+
+            default:
+                alert("Você não sabe esse ataque! Que pena...");
+                damageDealt = 0;
+        }
+
+        bossV -= damageDealt;
+        alert(`Você tirou ${damageDealt} pontos de vida de ${boss.nome}. Ainda restam ${bossV}!`);
+
+        if (bossV <= 0) {
+            alert(`Parabéns, ${jogador.nome}! Você derrotou ${boss.nome}!`);
+
+            document.getElementById("eight-title").innerHTML = `o fim de ${boss.nome}`;
+            document.getElementById("msg9").innerHTML = `${jogador.nome}, você se observa a distância... e quando menos percebe está onde deveria ser a entrada da Masmorra, mas não há mais nada aqui além de uma pequena colina e uma diversidade de árvores. O som da fauna se mistura com o vento que faz a flora falar em suas folhas... e você só escuta.`;
+
+            document.getElementById("exploreEIGHTwin").style.display = "flex";
+
+            document.getElementById("exploreEIGHTwin").scrollIntoView();
+
+            return jogador.vida;
+        }
+
+        alert(`${boss.nome} ataca!`);
+
+        let damageTaken;
+        let ataqueInimigo = Math.random();
+
+        if (ataqueInimigo <= 0.5) {
+            damageTaken = bossA;
+        } else if (ataqueInimigo <= 0.8) {
+            damageTaken = bossA * 2;
+        } else {
+            damageTaken = bossA * 4;
+        }
+
+        jogadorV -= damageTaken;
+        alert(`${boss.nome} ataca e tira ${damageTaken} pontos de vida de você. Restam ${jogadorV}`);
+
+        if (jogadorV <= 0) {
+            alert(`${boss.nome} te derrotou! Game Over.`);
+
+            document.getElementById("eight-title-lose").innerHTML = `${boss.nome}, a eterna ameaça`;
+            document.getElementById("msg9-lose").innerHTML = `${jogador.nome}, você chegou perto... muito perto.`;
+            
+            document.getElementById("exploreEIGHTlose").style.display = "flex";
+            
+            document.getElementById("exploreEIGHTlose").scrollIntoView();
+            
+            jogador.vida = jogadorV;
+
+            return jogador.vida;
+        }
+    }
+}
+
+
+function final() {
+    document.getElementById("exploreEIGHTwin").style.opacity = "0.5";
+    document.getElementById("exploreEIGHTlose").style.opacity = "0.5";
+
+    document.getElementById("exploreFINAL").style.display = "flex";
+    document.getElementById("exploreFINAL").scrollIntoView();
+
+    if (jogador.vida >= 1) {
+        document.getElementById("btnFinal").disabled = true;
+        document.getElementById("btnFinal").classList.add("disabled-button");
+        document.getElementById("final-title").innerHTML = `${jogador.nome}!`;
+        document.getElementById("msg10").innerText = `este pode ser o fim desta jornada, mas agora que você provou para si mesmo toda a coragem e força que existe dentro de você o mundo virou uma grande oportunidade!`;
+        document.getElementById("msg10a").innerHTML = `seus atributos finais desta aventura:<br><br>ataque::  ${jogador.ataque}<br>vida::  ${jogador.vida}`;
+        document.getElementById("msg10b").innerHTML = `voa, Bruxão!`;
+        document.getElementById("videoFinal").setAttribute("src", "https://www.youtube.com/watch?v=ytHRxkhl638");
+    } else if (jogador.vida < 1) {
+        document.getElementById("pentelho").disabled = true;
+        document.getElementById("pentelho").classList.add("disabled-button");
+        document.getElementById("final-title").innerHTML = `${jogador.nome}...`;
+        document.getElementById("msg10").innerText = `lembre-se de que a verdadeira coragem é a persistência em situações adversas. Um pouco de conhecimento cai bem, mas depois de tudo isso acho que você acumulou um tanto dele.`;
+        document.getElementById("msg10a").innerHTML = `seus atributos finais desta aventura:<br><br>ataque::  ${jogador.ataque}<br>vida::  ${jogador.vida}`;
+        document.getElementById("msg10b").innerHTML = `voa, Bruxão!`;
+        document.getElementById("videoFinal").setAttribute("src", "https://www.youtube.com/embed/SUDQklUHCj0?si=NozCLbeBgpF4BC04");
+    } else {
+        return;
+    }
+}
+
+
+function exit() {
+    window.close();
 }
