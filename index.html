@@ -30,11 +30,12 @@
     <main>
         <section id="welcome">
             <h2>Bem vindo!</h2>
-            <p>este é o projeto final::</p>
-            <p>do módulo 3 (Lógica)</p>
-            <p>para o curso FullStack</p>
-            <p>da Fullture.</p>
+            <p><span class="stand-first">este</span> é o <span class="stand-y">Projeto Final</span></p>
+            <p><span class="stand-first">do</span> <span class="stand-y">módulo 3</span> <span class="stand-b">(Lógica)</span></p>
+            <p><span class="stand-first">para</span> o curso <span class="stand-y">FullStack</span></p>
+            <p><span class="stand-first">da</span> <span class="stand-y">Fullture</span>.</p>
 
+            <h3>:: vamos lá ::</h3>
             <div class="btns">
                 <button onclick="startGame()">Iniciar</button>
             </div>
@@ -42,9 +43,10 @@
 
         <section id="atributes">
             <h2 id="msg1"></h2>
-            <p>Antes de mais nada você precisa definir seus atributos.</p>
-            <p>São 20 pontos para serem distribuidos entre vida e ataque.</p>
+            <p><span class="stand-first">antes</span> de mais nada você precisa definir seus <span class="stand-y">atributos</span>.</p>
+            <p><span class="stand-first">são</span> <span class="stand-b">20 pontos</span> para serem distribuidos entre <span class="stand-y">vida</span> e <span class="stand-y">ataque</span>.</p>
 
+            <h3>:: escolha bem ::</h3>
             <div class="btns">
                 <button onclick="setAttributes()">Definir</button>
             </div>
@@ -57,6 +59,7 @@
             <p id="msg2b"></p>
             <p id="msg2c"></p>
             
+            <h3>:: tudo pronto ::</h3>
             <div class="btns">
                 <button onclick="adventure()">Continuar</button>
             </div>
@@ -65,7 +68,11 @@
         <section id="exploreONE">
             <h2>o Começo</h2>
             <p id="msg3"></p>
+            <p id="msg3a"></p>
+            <p id="msg3b"></p>
+            <p id="msg3c"></p>
 
+            <h3>:: escolha ::</h3>
             <div class="btns">
                 <button id="btnGoTo" onclick="goTo()">Continuar</button>
             </div>
@@ -73,11 +80,11 @@
 
         <section id="exploreTWO">
             <h2>...na entrada da Masmorra</h2>
-            <p>Após seguir as instruções dadas pelos integrantes da Guilda, você chega na entrada da masmorra.</p>
+            <p><span class="stand-first">Após</span> seguir as instruções dadas pelos integrantes da <span class="stand-r">Guilda</span>, você chega na entrada da <span class="stand-y">masmorra</span>.</p>
 
             <p id="msg4"></p>
 
-            <h3>::o que você quer fazer::</h3>
+            <h3>:: escolha ::</h3>
             <div class="btns">
                 <button id="btnExplorarMasmorra" onclick="explorarEntrada()">Explorar as redondezas</button>
                 <button id="btnEntrarMasmorra" onclick="entrarMasmorra()">Entrar na Masmorra</button>
@@ -86,24 +93,24 @@
 
         <section id="exploreTHREE">
             <h2>Antecâmara</h2>
-            <p>Ao entrar na masmorra, você percebe que as paredes estão
-                cobertas por símbolos estranhos, emitindo uma luz fraca na
+            <p><span class="stand-first">Ao</span> entrar na masmorra, você percebe que as paredes estão
+                cobertas por <span class="stand-b">símbolos estranhos</span>, emitindo uma luz fraca na
                 penumbra. O ar dentro está impregnado com o cheiro forte
-                de morte e decomposição, fazendo sua pele arrepiar. Você
+                de <span class="stand-r">morte</span> e <span class="stand-r">decomposição</span>, fazendo sua pele arrepiar. Você
                 consegue ouvir os sons distantes de algo se movendo nas
-                profundezas da masmorra, mas não consegue identificar
+                <span class="stand-y">profundezas da masmorra</span>, mas não consegue identificar
                 exatamente o que é.</p>
 
             <div id="msg5-box" class="msg-box">
-                <p class="msgP">Ao analisar o interior da caverna, você nota que o piso está
-                    repleto de ossos de animais, deixando o cheiro pútrido ainda
-                    mais evidente, você começa a observar as paredes desta sala
-                    e encontra um objeto pendurado...</p>
+                <p class="msgP"><span class="stand-first">Ao</span> analisar o interior da caverna, você nota que o piso está
+                    repleto de <span class="stand-b">ossos de animais</span>, deixando o cheiro <span class="stand-r">pútrido</span> ainda
+                    mais evidente. Você começa a observar as paredes desta sala
+                    e <span class="stand-y">encontra um objeto pendurado</span>...</p>
 
                 <p id="msg5"></p>
             </div>
 
-            <h3>::o que você quer fazer::</h3>
+            <h3>:: escolha ::</h3>
             <div class="btns">
                 <div id="msg5-btn" class="btns">
                     <button id="btnTocar" onclick="tocarObj()">Tocar objeto</button>
@@ -118,7 +125,7 @@
 
             <p id="msg6"></p>
 
-            <h3>::o que você quer fazer::</h3>
+            <h3>:: escolha ::</h3>
             <div class="btns">
                 <button id="btnLutarEsqueletos" onclick="lutarEsqueletos()">Lutar!</button>
                 <button id="btnSairEsqueletos" onclick="sairEsqueletos()">Sair Correndo</button>
@@ -128,11 +135,11 @@
 
         <section id="exploreFIVEwin">
             <h2>Um Exército de Esqueletos</h2>
-            <p>Finalmente o Exército foi conquistado! Uma sensação de paz invade cada centímetro da câmara...</p>
+            <p><span class="stand-first">Finalmente</span> o <span class="stand-y">exército foi conquistado</span>! Uma sensação de <span class="stand-b">paz</span> invade cada centímetro da câmara...</p>
 
-            <p>Você repara que entre a pilha de ossos que restaram da batalha se encontra um frasco de vidro contendo um líquido vermelho.</p>
+            <p><span class="stand-first">Você</span> repara que entre a pilha de ossos que restaram da batalha se encontra um <span class="stand-y">frasco de vidro</span> contendo <span class="stand-r">líquido vermelho</span>.</p>
 
-            <h3>::o que você quer fazer::</h3>
+            <h3>:: escolha ::</h3>
             <div class="btns">
                 <button id="btnBeberUmPouco" onclick="frasco('pouco')">Beber só um pouco</button>
                 <button id="btnBeberTudo" onclick="frasco('tudo')">Beber TUDO!</button>
@@ -149,9 +156,10 @@
 
         <section id="exploreFIVElose">
             <h2>Um Exército de Esqueletos</h2>
-            <p>Não foi dessa vez que você derrotou o antigo Exército de Esqueletos... tudo fica escuro e quieto...</p>
+            <p><span class="stand-first">não</span> foi dessa vez que você derrotou o antigo <span class="stand-y">Exército de Esqueletos</span>...</p>
+            <p><span class="stand-first">Tudo</span> fica <span class="stand-r">escuro</span> e <span class="stand-b">quieto</span>...</p>
 
-            <h3>::sem muita escolha..::</h3>
+            <h3>:: sem muita escolha ::</h3>
             <div class="btns">
                 <button id="btnRecomecar" onclick="recomecar()">Recomeçar!</button>
             </div>
@@ -159,10 +167,10 @@
 
         <section id="exploreSIX">
             <h2>Um novo horizonte?</h2>
-            <p>Num piscar de olhos você está em uma planície muito peculiar e ao mesmo tempo familiar também...</p>
-            <p>você percebe que está diante de três portas...</p>
+            <p><span class="stand-first">Num</span> piscar de olhos você está em uma <span class="stand-b">planície</span> muito <span class="stand-r">peculiar</span> e ao mesmo tempo <span class="stand-r">familiar</span>...</p>
+            <p><span class="stand-first">você</span> percebe que está diante de <span class="stand-y">três portas</span>...</p>
 
-            <h3>::em qual você vai entrar::</h3>
+            <h3>:: entrar ::</h3>
             <div class="btns">
                 <button id="btnOuro" onclick="entrarOuro()">Porta de Ouro</button>
                 <button id="btnFerro" onclick="entrarFerro()">Porta de Ferro</button>
@@ -177,7 +185,7 @@
             <p id="msg8b"></p>
             <p id="msg8c"></p>
 
-            <h3>::não tem volta..::</h3>
+            <h3>:: não tem volta ::</h3>
             <div class="btns">
                 <button id="btnLutarBoss" onclick="lutarBoss()">é agora ou nunca!</button>
             </div>
@@ -187,7 +195,7 @@
             <h2 id="eight-title"></h2>
             <p id="msg9"></p>
 
-            <h3>::é isso camarada::</h3>
+            <h3>:: é isso camarada ::</h3>
             <div class="btns">
                 <button id="btnFinal" onclick="final()">Fim!</button>
             </div>
@@ -198,7 +206,7 @@
             <h2 id="eight-title-lose"></h2>
             <p id="msg9-lose"></p>
 
-            <h3>::eae?::</h3>
+            <h3>:: eae? ::</h3>
             <div class="btns">
                 <button id="pentelho" onclick="final()">Recomeçar?</button>
             </div>
@@ -215,7 +223,7 @@
                 <iframe id="videoFinal" width="300" height="300" src="https://www.youtube.com/embed/_JZom_gVfuw?si=mLyRtQJkTAZySG0F"></iframe>
             </div>
 
-            <h3>::! MUITO OBRIGADO !::</h3>
+            <h3>:: ! MUITO OBRIGADO ! ::</h3>
             <div class="btns">
                 <button id="btnRecomecar" onclick="recomecar()">de novo</button>
                 <button id="btnExit" onclick="exit()">mais tarde</button>
@@ -224,6 +232,10 @@
         </section>
 
     </main>
+
+    <footer>
+        <p>"perder também é divertido! "</p>
+    </footer>
 
 </body>
 

@@ -13,7 +13,9 @@ const boss = {
     nome: "",
     ataque: 130,
     vida: 1500,
-}; 
+};
+
+let pedraNoCaminho = false;
 
 function reverseName(name) {
     return name.split("").reverse().join("");
@@ -63,10 +65,10 @@ function setAttributes() {
         document.getElementById("atributes").style.display = "none";
         document.getElementById("summary").style.display = "flex";
 
-        document.getElementById("msg2").innerHTML = `Seu nome é::`;
-        document.getElementById("msg2a").innerHTML = ` ${jogador.nome}`;
-        document.getElementById("msg2b").innerHTML = `seus atributos::`;
-        document.getElementById("msg2c").innerHTML = `vida::  ${vidaJogador * 100}<br><br>ataque::  ${ataqueJogador * 10}`;
+        document.getElementById("msg2").innerHTML = `<span class="stand-first">Seu</span> <span class="stand-b">nome</span>::`;
+        document.getElementById("msg2a").innerHTML = ` <span class="stand-y">${jogador.nome}</span>`;
+        document.getElementById("msg2b").innerHTML = `<span class="stand-first">seus</span> <span class="stand-b">atributos</span>::`;
+        document.getElementById("msg2c").innerHTML = `<span class="stand-r">vida</span>::  <span class="stand-y">${vidaJogador * 100}</span><br><br><span class="stand-r">ataque</span>::  <span class="stand-y">${ataqueJogador * 10}</span>`;
 
         jogador.ataque = ataqueJogador * 10;
         jogador.vida = vidaJogador * 100;
@@ -79,9 +81,10 @@ function setAttributes() {
 function adventure() {
     document.getElementById("summary").style.display = "none";
     document.getElementById("exploreONE").style.display = "flex";
-    document.getElementById(
-        "msg3"
-    ).innerHTML = `Então, ${jogador.nome}... já se passaram alguns dias desde que você se juntou a Guilda dos Aventureuiros. Pelo visto você não se lembra, mas logo antes de aparecer aqui você estava perambulando pela área da Masmorra de Ferro, aqui pertinho... Eu recomendo que você volte a entrada da masmorra e tente novos caminhos.`;
+    document.getElementById("msg3").innerHTML = `<span class="stand-first">então</span>, ${jogador.nome}...`;
+    document.getElementById("msg3a").innerHTML = `<span class="stand-first">já</span> se passaram alguns dias desde que você se juntou a <span class="stand-r">Guilda dos Aventureuiros</span>.`;
+    document.getElementById("msg3b").innerHTML = `<span class="stand-first">pelo</span> visto você não se lembra, mas logo antes de aparecer aqui você estava perambulando pela área da <span class="stand-y">Masmorra de Ferro</span>, aqui pertinho...`;
+    document.getElementById("msg3c").innerHTML = `<span class="stand-first">eu</span> recomendo que você volte a entrada da masmorra e tente <span class="stand-b">novos caminhos</span>.`;
 }
 
 
@@ -103,12 +106,13 @@ function explorarEntrada() {
         jogador.vida += 200;
         document.getElementById(
             "msg4"
-        ).innerHTML = `Parabéns, ${jogador.nome}!<br>Você encontrou Carne de Lagardão e adquiriu 200 de vida. Agora você tem ${jogador.vida} de vida.`;
+        ).innerHTML = `<span class="stand-first">Parabéns</span>, ${jogador.nome}!<br>Você encontrou <span class="stand-b">Carne de Lagardão</span> e <span class="stand-y">adquiriu 200 de vida</span>. <span class="stand-i">( = ${jogador.vida} )</span>`;
     } else {
         jogador.ataque = Math.round(jogador.ataque * 1.1);
         document.getElementById(
             "msg4"
-        ).innerHTML = `Infelizmente parece que não há nada por aqui que possa ajudar. Pelo menos você se exercitou um pouco e adquiriu 10% de ataque. Agora você tem ${jogador.ataque} de ataque.`;
+        ).innerHTML = `<span class="stand-first">Infelizmente</span> parece que <span class="stand-r">não há nada por aqui</span> que possa ajudar. Pelo menos você se <span class="stand-b">exercitou um pouco</span> e <span class="stand-y">adquiriu 10% de ataque</span>. <span class="stand-i">
+        ( = ${jogador.ataque} )</span>`;
     }
 
     document.getElementById("btnExplorarMasmorra").disabled = true;
@@ -159,8 +163,9 @@ function tocarObj() {
 
     jogador.vida *= healthModifier;
     jogador.ataque *= attackModifier;
+    pedraNoCaminho = true;
 
-    const message = `${jogador.nome}! Você recebeu a maldição ${curseDescription}. Seus pontos de vida agora são ${healthModifier === 2 ? 'o dobro' : 'a metade'} (${jogador.vida}), mas seus pontos de ataque ${attackModifier === 2 ? 'dobraram' : 'caíram pela metade'} (${jogador.ataque}).`;
+    const message = `<span class="stand-first">${jogador.nome}</span>! Você recebeu a <span class="stand-y">maldição ${curseDescription}</span>. Seus pontos de vida agora são ${healthModifier === 2 ? '<span class="stand-b">o dobro</span>' : '<span class="stand-r">a metade</span>'} <span class="stand-i">(= ${jogador.vida})</span>, mas seus pontos de ataque ${attackModifier === 2 ? '<span class="stand-b">dobraram</span>' : '<span class="stand-r">caíram pela metade</span>'} <span class="stand-i">(= ${jogador.ataque})</span>.`;
 
     document.getElementById("msg5").innerHTML = message;
     document.getElementById("msg5").style.display = "block";
@@ -181,23 +186,20 @@ function seguirAntecamara() {
     document.getElementById("exploreTHREE").style.opacity = "0.5";
     document.getElementById("exploreFOUR").style.display = "flex";
 
-    const checkEntry = document.getElementById("btnTocar").disabled;
+    document.getElementById("exploreFOUR").scrollIntoView();
 
-    if (checkEntry) {
+    if (pedraNoCaminho) {
         document.getElementById(
             "msg6"
-        ).innerHTML = `${jogador.nome}! Se prepare um exército de esqueletos se aproxima!`;
+        ).innerHTML = `<span class="stand-first">${jogador.nome}</span>! Se prepare um <span class="stand-y">exército de esqueletos</span> se aproxima!`;
     } else {
         jogador.vida -= jogador.vida * 0.05; 
         document.getElementById(
             "msg6"
-        ).innerHTML = `Ao se adiantar para a entrada, você tropega e perde 5% de sua vida. Você agora tem ${jogador.vida} de vida.<br><br>${jogador.nome}! Se prepare um exército de esqueletos se aproxima!`;
+        ).innerHTML = `<span class="stand-first">Ao</span> se adiantar para a entrada, você <span class="stand-r">tropega</span> e <span class="stand-r">perde</span> <span class="stand-b">5% de sua vida</span> <span class="stand-i">(= ${jogador.vida})</span>.</p><p><span class="stand-first">${jogador.nome}</span>! Se prepare, um <span class="stand-y">exército de esqueletos</span> se aproxima!`;
 
         return Math.round(jogador.vida);
     }
-
-    
-    document.getElementById("exploreFOUR").scrollIntoView();
 }
 
 
@@ -309,7 +311,6 @@ function recomecar() {
     location.reload();
 }
 
-
 function frasco(x) {
     switch(x) {
         case 'pouco':
@@ -323,7 +324,7 @@ function frasco(x) {
             document.getElementById("btnQuebrarFrasco").classList.add("disabled-button");
             
             document.getElementById("msg7").style.display = "block";
-            document.getElementById("msg7").innerHTML = `Parabéns, ${jogador.nome}!<br><br>A dose é a diferença entre a cura e o veneno! Sua vida aumentou em 2000.<br><br>Agora você tem ${jogador.vida} de vida.`;
+            document.getElementById("msg7").innerHTML = `<span class="stand-first">Parabéns</span>, ${jogador.nome}!<br><br><span class="stand-first">a</span> <span class="stand-y">dose</span> é a diferença entre a <span class="stand-b">cura</span> e o <span class="stand-r">veneno</span>!<br><br><span class="stand-first">sua</span> <span class="stand-y">vida</span> aumentou em <span class="stand-y">2000</span>. <span class="stand-i">(= ${jogador.vida})`;
 
             document.getElementById("title-frasco").innerHTML = "::agora sim::";
             
@@ -341,7 +342,7 @@ function frasco(x) {
             document.getElementById("title-frasco").innerHTML = "::agora sim::";
 
             document.getElementById("msg7").style.display = "block";
-            document.getElementById("msg7").innerHTML = `Uau, ${jogador.nome}!<br><br>Pelo menos de sede você não.... né! Sua vida aumentou em 45%. Agora você tem ${jogador.vida} de vida.`;
+            document.getElementById("msg7").innerHTML = `<span class="stand-first">Uau</span>, ${jogador.nome}!<br><br><span class="stand-first">pelo</span> menos de <span class="stand-r">sede</span> você não <span class="stand-r">m...</span> né!?<br><br><span class="stand-first">sua</span> <span class="stand-y">vida</span> aumentou em <span class="stand-y">45%</span>. <span class="stand-i">(= ${jogador.vida})`;
 
             break;
         case 'quebrar':
@@ -357,7 +358,7 @@ function frasco(x) {
             document.getElementById("title-frasco").innerHTML = "::agora sim::";
 
             document.getElementById("msg7").style.display = "block";
-            document.getElementById("msg7").innerHTML = `${jogador.nome}!<br><br>O frasco quebrou!<br><br>O líquido vermelho ao entrar em contato com o chão evapora em uma névoa púrpura que invade suas narinas.<br><br>Ao respirar tal substância seu ataque aumentou em 45%. Agora você tem ${jogador.ataque} de ataque.`;
+            document.getElementById("msg7").innerHTML = `<span class="stand-first">${jogador.nome}</span>!<br><br><span class="stand-first">o</span> <span class="stand-y">frasco</span> quebrou<span class="stand-r">!</span><br><br><span class="stand-first">o</span> <span class="stand-r">líquido vermelho</span> ao entrar em contato com o chão evapora em uma <span class="stand-b">névoa púrpura</span> que invade suas narinas.<br><br><span class="stand-first">ao</span> respirar <span class="stand-b">tal substância</span>, seu <span class="stand-y">ataque</span> aumentou em <span class="stand-y">45%</span>. <span class="stand-i"> ( =${jogador.ataque})`;
 
             break;
     }
@@ -399,10 +400,10 @@ function entrarOuro() {
     boss.vida *= 1.3;
 
     document.getElementById("seven-title").innerHTML = "Poder, riqueza e mais...";
-    document.getElementById("msg8").innerHTML = `Atrás dela você encontra ouro, cristais, etc... e já começa a imaginar toda a glória e poder que poderá onter com este tesouro praticamente infinito.`;
-    document.getElementById("msg8a").innerHTML = `Assim que você toca a primeira moeda a seu alncace uma voz grave e ecoante chama seu nome...`;
-    document.getElementById("msg8b").innerHTML = `"Então você prefere assim? Acha que seria fácil?"`;
-    document.getElementById("msg8c").innerHTML = `o temível ${boss.nome} surge! com uma aura de poder nunca antes vista...`;
+    document.getElementById("msg8").innerHTML = `<span class="stand-first">atrás</span> dela você encontra <span class="stand-y">ouro, cristais, etc</span>... e já começa a <span class="stand-b">imaginar</span> toda a <span class="stand-r">glória</span> e <span class="stand-r">poder</span> que poderá obter com este tesouro praticamente <span class="stand-y">infinito</span>.`;
+    document.getElementById("msg8a").innerHTML = `<span class="stand-first">assim</span> que você toca a primeira moeda <span class="stand-y">uma voz</span> <span class="stand-r">grave</span> e <span class="stand-b">ecoante</span> chama seu nome...`;
+    document.getElementById("msg8b").innerHTML = `"<span class="stand-first">então</span>, você prefere assim? Acha que seria <span class="stand-r">fácil</span>?"`;
+    document.getElementById("msg8c").innerHTML = `<span class="stand-first">o</span> <span class="stand-r">temível</span> <span class="stand-y">${boss.nome}</span> surge! com uma aura de poder <span class="stand-y">nunca antes vista</span>...`;
 }
 
 
@@ -422,11 +423,11 @@ function entrarFerro() {
     jogador.ataque *= 1.6;
     jogador.vida *= 1.6;
 
-    document.getElementById("seven-title").innerHTML = "Poder, riqueza e mais...";
-    document.getElementById("msg8").innerHTML = `após atravessa-la tudo sua volta desparece. o infinito é seu novo horizonte...`;
-    document.getElementById("msg8a").innerHTML = `alguns minutos se passam até que você consegue escutar alguém chamando por seu nome.`;
-    document.getElementById("msg8b").innerHTML = `"Finalmente você conseguiu chegar até minhã moradia. Seus passos até aqui não foram fáceis, não espere nenhum tipo de alívio agora..."`;
-    document.getElementById("msg8c").innerHTML = `${boss.nome}, o semeador de todo o mal corre em sua direção!`;
+    document.getElementById("seven-title").innerHTML = `Poder, riqueza e mais...`;
+    document.getElementById("msg8").innerHTML = `<span class="stand-first">após</span> atravessa-la <span class="stand-b">tudo a sua volta</span> <span class="stand-y">desparece</span>. o infinito é seu novo horizonte...`;
+    document.getElementById("msg8a").innerHTML = `<span class="stand-first">alguns</span> minutos se passam até que você consegue <span class="stand-b">escutar</span> <span class="stand-y">alguém</span> <span class="stand-r">chamando</span> por seu nome.`;
+    document.getElementById("msg8b").innerHTML = `"<span class="stand-first">Finalmente</span> você conseguiu chegar até <span class="stand-b">minha moradia</span>. Seus passos até aqui não foram <span class="stand-r">fáceis</span>, não espere nenhum tipo de alívio <span class="stand-y">agora</span>..."`;
+    document.getElementById("msg8c").innerHTML = `<span class="stand-first">${boss.nome}</span>, o <span class="stand-r">semeador de todo o mal</span>, <span class="stand-y">corre em sua direção</span>!`;
 }
 
 
@@ -491,7 +492,7 @@ function lutarBoss() {
             alert(`Parabéns, ${jogador.nome}! Você derrotou ${boss.nome}!`);
 
             document.getElementById("eight-title").innerHTML = `o fim de ${boss.nome}`;
-            document.getElementById("msg9").innerHTML = `${jogador.nome}, você se observa a distância... e quando menos percebe está onde deveria ser a entrada da Masmorra, mas não há mais nada aqui além de uma pequena colina e uma diversidade de árvores. O som da fauna se mistura com o vento que faz a flora falar em suas folhas... e você só escuta.`;
+            document.getElementById("msg9").innerHTML = `<span class="stand-first">${jogador.nome}</span>, você se <span class="stand-b">observa</span> a <span class="stand-b">distância</span>... e quando menos <span class="stand-b">percebe</span> está onde deveria ser a entrada da <span class="stand-r">Masmorra</span>, mas <span class="stand-y">não há mais nada aqui</span> além de uma pequena colina e uma diversidade de árvores. O som da <span class="stand-b">fauna</span> se <span class="stand-b">mistura</span> com o vento que faz a <span class="stand-b">flora</span> falar em suas folhas... e você só <span class="stand-b">escuta</span>.`;
 
             document.getElementById("exploreEIGHTwin").style.display = "flex";
 
@@ -520,7 +521,7 @@ function lutarBoss() {
             alert(`${boss.nome} te derrotou! Game Over.`);
 
             document.getElementById("eight-title-lose").innerHTML = `${boss.nome}, a eterna ameaça`;
-            document.getElementById("msg9-lose").innerHTML = `${jogador.nome}, você chegou perto... muito perto.`;
+            document.getElementById("msg9-lose").innerHTML = `<span class="stand-first">${jogador.nome}</span>, você chegou <span class="stand-y">perto</span>... <span class="stand-r">muito</span> perto.`;
             
             document.getElementById("exploreEIGHTlose").style.display = "flex";
             
@@ -545,17 +546,17 @@ function final() {
         document.getElementById("btnFinal").disabled = true;
         document.getElementById("btnFinal").classList.add("disabled-button");
         document.getElementById("final-title").innerHTML = `${jogador.nome}!`;
-        document.getElementById("msg10").innerText = `este pode ser o fim desta jornada, mas agora que você provou para si mesmo toda a coragem e força que existe dentro de você o mundo virou uma grande oportunidade!`;
-        document.getElementById("msg10a").innerHTML = `seus atributos finais desta aventura:<br><br>ataque::  ${jogador.ataque}<br>vida::  ${jogador.vida}`;
-        document.getElementById("msg10b").innerHTML = `voa, Bruxão!`;
+        document.getElementById("msg10").innerHTML = `<span class="stand-first">este</span> pode ser o <span class="stand-r">fim</span> desta jornada, mas agora que você <span class="stand-b">provou</span> para si mesmo toda a <span class="stand-b">coragem</span> e <span class="stand-first">força</span> que existe dentro de você <span class="stand-r">o mundo</span> virou uma <span class="stand-y">grande oportunidade</span>!`;
+        document.getElementById("msg10a").innerHTML = `<span class="stand-first">seus</span> <span class="stand-y">atributos finais</span> desta <span class="stand-b">aventura</span>:<br><br><span class="stand-r">ataque</span>::  ${jogador.ataque}<br><span class="stand-b">vida</span>::  ${jogador.vida}`;
+        document.getElementById("msg10b").innerHTML = `<span class="stand-b">voa</span>, <span class="stand-y">Bruxão</span>!`;
         document.getElementById("videoFinal").setAttribute("src", "https://www.youtube.com/watch?v=ytHRxkhl638");
     } else if (jogador.vida < 1) {
         document.getElementById("pentelho").disabled = true;
         document.getElementById("pentelho").classList.add("disabled-button");
         document.getElementById("final-title").innerHTML = `${jogador.nome}...`;
-        document.getElementById("msg10").innerText = `lembre-se de que a verdadeira coragem é a persistência em situações adversas. Um pouco de conhecimento cai bem, mas depois de tudo isso acho que você acumulou um tanto dele.`;
-        document.getElementById("msg10a").innerHTML = `seus atributos finais desta aventura:<br><br>ataque::  ${jogador.ataque}<br>vida::  ${jogador.vida}`;
-        document.getElementById("msg10b").innerHTML = `voa, Bruxão!`;
+        document.getElementById("msg10").innerHTML = `<span class="stand-first">lembre-se</span> de que a verdadeira <span class="stand-b">coragem</span> é a <span class="stand-b">persistência</span> em <span class="stand-r">situações adversas</span>. Um pouco de <span class="stand-b">conhecimento</span> cai bem, mas depois de tudo isso acho que você acumulou um <span class="stand-y">tanto</span> dele.`;
+        document.getElementById("msg10a").innerHTML = `<span class="stand-first">seus</span> <span class="stand-y">atributos finais</span> desta <span class="stand-b">aventura</span>:<br><br><span class="stand-r">ataque</span>::  ${jogador.ataque}<br><span class="stand-b">vida</span>::  ${jogador.vida}`;
+        document.getElementById("msg10b").innerHTML = `<span class="stand-b">voa</span>, <span class="stand-y">Bruxão</span>!`;
         document.getElementById("videoFinal").setAttribute("src", "https://www.youtube.com/embed/SUDQklUHCj0?si=NozCLbeBgpF4BC04");
     } else {
         return;
@@ -566,3 +567,4 @@ function final() {
 function exit() {
     window.close();
 }
+
