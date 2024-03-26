@@ -235,3 +235,11 @@ button:hover {
 #msg5-btn {
     display: none;
 }
+
+#welcome {
+    display: flex;
+}
+
+#msg5-box {
+    display: none;
+}
